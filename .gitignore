@@ -2,6 +2,8 @@ reserve.md
 HELP.md
 .gradle
 build/
+app/src/test
+app/src/androidTest
 
 ### STS ###
 .apt_generated
