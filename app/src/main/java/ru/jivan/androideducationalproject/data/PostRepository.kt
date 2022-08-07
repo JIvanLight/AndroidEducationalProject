@@ -5,9 +5,9 @@ import ru.jivan.androideducationalproject.dto.Post
 
 interface PostRepository {
 
-    val data: LiveData<Post>
+    val data: LiveData<List<Post>>
 
-    fun like()
+    fun like(postId: Int)
 
-    fun share()
+    fun share(postId: Int)
 }

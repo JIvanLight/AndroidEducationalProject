@@ -3,6 +3,7 @@ package ru.jivan.androideducationalproject.viewModel
 import androidx.lifecycle.ViewModel
 import ru.jivan.androideducationalproject.data.InMemoryPostRepository
 import ru.jivan.androideducationalproject.data.PostRepository
+import ru.jivan.androideducationalproject.dto.Post
 
 class PostViewModel : ViewModel() {
 
@@ -10,7 +11,7 @@ class PostViewModel : ViewModel() {
 
     val data by repository::data
 
-    fun onLikeCliked() = repository.like()
+    fun onLikeCliked(post: Post) = repository.like(post.id)
 
-    fun onShareCliked() = repository.share()
+    fun onShareCliked(post: Post) = repository.share(post.id)
 }

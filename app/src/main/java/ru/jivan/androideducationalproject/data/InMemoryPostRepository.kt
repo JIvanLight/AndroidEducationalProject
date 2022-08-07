@@ -6,36 +6,45 @@ import ru.jivan.androideducationalproject.dto.Post
 
 class InMemoryPostRepository : PostRepository {
     override val data = MutableLiveData(
-        Post(
-            id = 0,
-            author = "Иван",
-            content = "Здесь могла быть Ваша РЕКЛАМА!",
-            published = "6 июня 2022 в 12:30",
-            likes = 1_999_999,
-            share = 990
-        )
+        List(10) {
+            Post(
+                id = it,
+                author = "Иван",
+                content = "Здесь могла быть Ваша РЕКЛАМА! №$it",
+                published = "6 июня 2022 в 12:30",
+                likes = 1_999_999,
+                share = 990
+            )
+        }
     )
 
-    override fun like() {
-        val currentPost = checkNotNull(data.value) {
+    private val posts
+        get() = checkNotNull(data.value) {
             "Data value should not be null"
         }
-        if (!currentPost.likedByMe) {
-            val increasedLikes = currentPost.likes + 1
-            val newlikedByMe = !currentPost.likedByMe
-            data.value = currentPost.copy(likes = increasedLikes, likedByMe = newlikedByMe)
-        } else {
-            val decreasedLikes = currentPost.likes - 1
-            val newlikedByMe = !currentPost.likedByMe
-            data.value = currentPost.copy(likes = decreasedLikes, likedByMe = newlikedByMe)
+
+    override fun like(postId: Int) {
+        data.value = posts.map {
+            if (it.id == postId) {
+                if (!it.likedByMe) {
+                    val increasedLikes = it.likes + 1
+                    val newlikedByMe = !it.likedByMe
+                    it.copy(likes = increasedLikes, likedByMe = newlikedByMe)
+                } else {
+                    val decreasedLikes = it.likes - 1
+                    val newlikedByMe = !it.likedByMe
+                    it.copy(likes = decreasedLikes, likedByMe = newlikedByMe)
+                }
+            } else it
         }
     }
 
-    override fun share() {
-        val currentPost = checkNotNull(data.value) {
-            "Data value should not be null"
+    override fun share(postId: Int) {
+        data.value = posts.map {
+            if (it.id == postId) {
+                val increaseShare = it.share + 1
+                it.copy(share = increaseShare)
+            } else it
         }
-        val increaseShare = currentPost.share + 1
-        data.value = currentPost.copy(share = increaseShare)
     }
 }
