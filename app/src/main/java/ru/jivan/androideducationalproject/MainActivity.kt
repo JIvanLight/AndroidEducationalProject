@@ -1,49 +1,33 @@
 package ru.jivan.androideducationalproject
 
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.annotation.DrawableRes
 import ru.jivan.androideducationalproject.databinding.ActivityMainBinding
 import ru.jivan.androideducationalproject.dto.Post
+import ru.jivan.androideducationalproject.viewModel.PostViewModel
 
 
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel: PostViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var post = Post(
-            id = 0,
-            author = "Иван",
-            content = "Здесь могла быть Ваша РЕКЛАМА!",
-            published = "6 июня 2022 в 12:30",
-            likes = 1_999_999,
-            share = 990
-        )
+        viewModel.data.observe(this) { post ->
+            binding.render(post)
+        }
 
-        binding.render(post)
         binding.likes.setOnClickListener {
-            if (!post.likedByMe) {
-                val increasedLikes = post.likes + 1
-                val newlikedByMe = !post.likedByMe
-                post = post.copy(likes = increasedLikes, likedByMe = newlikedByMe)
-                binding.likeValue.text = convertThousandsToText(post.likes)
-                binding.likes.setImageResource(R.drawable.ic_liked_24)
-            } else {
-                val decreasedLikes = post.likes - 1
-                val newlikedByMe = !post.likedByMe
-                post = post.copy(likes = decreasedLikes, likedByMe = newlikedByMe)
-                binding.likeValue.text = convertThousandsToText(post.likes)
-                binding.likes.setImageResource(R.drawable.ic_likes_24dp)
-            }
+            viewModel.onLikeCliked()
         }
 
         binding.share.setOnClickListener {
-            val increaseShare = post.share + 1
-            post = post.copy(share = increaseShare)
-            binding.shareValue.text = convertThousandsToText(post.share)
+            viewModel.onShareCliked()
         }
     }
 
