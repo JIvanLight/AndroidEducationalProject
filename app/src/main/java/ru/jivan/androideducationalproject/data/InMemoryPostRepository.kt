@@ -8,7 +8,7 @@ class InMemoryPostRepository : PostRepository {
     override val data = MutableLiveData(
         List(10) {
             Post(
-                id = 0,
+                id = it,
                 author = "Иван",
                 content = "Здесь могла быть Ваша РЕКЛАМА! №$it",
                 published = "6 июня 2022 в 12:30",
