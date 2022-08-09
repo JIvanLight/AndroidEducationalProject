@@ -2,6 +2,7 @@ package ru.jivan.androideducationalproject.data
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -9,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.jivan.androideducationalproject.R
 import ru.jivan.androideducationalproject.databinding.PostBinding
 import ru.jivan.androideducationalproject.dto.Post
+import ru.jivan.androideducationalproject.viewModel.PostInteractiveListener
 
 internal class PostAdapter(
-    private val onLikeClicked: (Post) -> Unit,
-    private val onShareClicked: (Post) -> Unit
+    private val interactionListener: PostInteractiveListener
 ) : ListAdapter<Post, PostAdapter.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,13 +26,33 @@ internal class PostAdapter(
         holder.bind(getItem(position))
     }
 
-    inner class ViewHolder(private val binding: PostBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: PostBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        private val popupMenu by lazy {
+            PopupMenu(
+                itemView.context,
+                binding.optionsIc
+            ).apply {
+                inflate(R.menu.options_post)
+                setOnMenuItemClickListener { menuItem ->
+                    when (menuItem.itemId) {
+                        R.id.remove -> {
+                            interactionListener.onRemoveClicked(post)
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            }
+        }
 
         lateinit var post: Post
 
         init {
-            binding.likes.setOnClickListener { onLikeClicked(post) }
-            binding.share.setOnClickListener { onShareClicked(post) }
+            binding.likes.setOnClickListener { interactionListener.onLikeCliked(post) }
+            binding.share.setOnClickListener { interactionListener.onShareCliked(post) }
+            binding.optionsIc.setOnClickListener { popupMenu.show() }
         }
 
         fun bind(post: Post) {

@@ -10,4 +10,6 @@ interface PostRepository {
     fun like(postId: Int)
 
     fun share(postId: Int)
+
+    fun remove(postId: Int)
 }

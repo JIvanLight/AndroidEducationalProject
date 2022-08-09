@@ -47,4 +47,8 @@ class InMemoryPostRepository : PostRepository {
             } else it
         }
     }
+
+    override fun remove(postId: Int) {
+        data.value = posts.filter { it.id != postId }
+    }
 }

@@ -17,10 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
-        val adapter = PostAdapter(
-            viewModel::onLikeCliked,
-            viewModel::onShareCliked
-        )
+        val adapter = PostAdapter(viewModel)
 
         binding.postsRecyclerView.adapter = adapter
 

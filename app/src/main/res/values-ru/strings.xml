@@ -7,4 +7,5 @@
     <string name="likeValue">10</string>
     <string name="shareValue">5</string>
     <string name="eyeValue">5</string>
+    <string name="remove">Удалить</string>
 </resources>
