@@ -4,9 +4,13 @@ import ru.jivan.androideducationalproject.dto.Post
 
 interface PostInteractiveListener {
 
-    fun onLikeCliked(post: Post)
+    fun onLikeClicked(post: Post)
 
-    fun onShareCliked(post: Post)
+    fun onShareClicked(post: Post)
 
     fun onRemoveClicked(post: Post)
+
+    fun onSaveButtonClicked(content: String)
+
+    fun onEditClicked(post: Post)
 }

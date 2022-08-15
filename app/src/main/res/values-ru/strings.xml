@@ -8,4 +8,8 @@
     <string name="shareValue">5</string>
     <string name="eyeValue">5</string>
     <string name="remove">Удалить</string>
+    <string name="post_text">Текст</string>
+    <string name="redact_text">Редактирование\n %1$s </string>
+    <string name="description_post_like">описание лайка поста</string>
+    <string name="edit">Редактировать</string>
 </resources>

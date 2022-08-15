@@ -1,4 +1,4 @@
-package ru.jivan.androideducationalproject.data
+package ru.jivan.androideducationalproject.viewModel.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -41,6 +41,10 @@ internal class PostAdapter(
                             interactionListener.onRemoveClicked(post)
                             true
                         }
+                        R.id.edit -> {
+                            interactionListener.onEditClicked(post)
+                            true
+                        }
                         else -> false
                     }
                 }
@@ -50,8 +54,8 @@ internal class PostAdapter(
         lateinit var post: Post
 
         init {
-            binding.likes.setOnClickListener { interactionListener.onLikeCliked(post) }
-            binding.share.setOnClickListener { interactionListener.onShareCliked(post) }
+            binding.likes.setOnClickListener { interactionListener.onLikeClicked(post) }
+            binding.share.setOnClickListener { interactionListener.onShareClicked(post) }
             binding.optionsIc.setOnClickListener { popupMenu.show() }
         }
 
