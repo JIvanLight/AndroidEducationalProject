@@ -1,16 +1,18 @@
-package ru.jivan.androideducationalproject.data
+package ru.jivan.androideducationalproject.viewModel.repositories
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.jivan.androideducationalproject.dto.Post
 
 class InMemoryPostRepository : PostRepository {
+
+    private var nextId = 10
+
     override val data = MutableLiveData(
         List(10) {
             Post(
-                id = it,
+                id = 1 + it,
                 author = "Иван",
-                content = "Здесь могла быть Ваша РЕКЛАМА! №$it",
+                content = "Здесь могла быть Ваша РЕКЛАМА! №${1 + it}",
                 published = "6 июня 2022 в 12:30",
                 likes = 1_999_999,
                 share = 990
@@ -45,6 +47,26 @@ class InMemoryPostRepository : PostRepository {
                 val increaseShare = it.share + 1
                 it.copy(share = increaseShare)
             } else it
+        }
+    }
+
+    override fun remove(postId: Int) {
+        data.value = posts.filter { it.id != postId }
+    }
+
+    override fun save(post: Post) {
+        if (post.id == PostRepository.NEW_POST_ID) insert(post) else update(post)
+    }
+
+    private fun insert(post: Post) {
+        data.value = listOf(
+            post.copy(id = ++nextId)
+        ) + posts
+    }
+
+    private fun update(post: Post) {
+        data.value = posts.map {
+            if (post.id == it.id) post else it
         }
     }
 }
