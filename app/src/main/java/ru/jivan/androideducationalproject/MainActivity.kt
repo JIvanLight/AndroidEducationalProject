@@ -1,11 +1,7 @@
 package ru.jivan.androideducationalproject
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MotionEvent
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import androidx.activity.viewModels
 import ru.jivan.androideducationalproject.viewModel.adapters.PostAdapter
 import ru.jivan.androideducationalproject.databinding.ActivityMainBinding
@@ -15,13 +11,6 @@ import androidx.constraintlayout.widget.Group
 
 
 class MainActivity : AppCompatActivity() {
-//This is an attempt to defocus (1)
-//    private lateinit var _viewModel: PostViewModel
-//    override fun onBackPressed() {
-//        val flag = checkNotNull(_viewModel.flagFocusEditText.value)
-//        if (flag) findViewById<EditText>(R.id.contentEditText).clearFocus()
-//        super.onBackPressed()
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +19,7 @@ class MainActivity : AppCompatActivity() {
         binding.contentEditText.requestFocus()
 
         val viewModel: PostViewModel by viewModels()
-//This is an attempt to defocus (2)
-        //_viewModel = viewModel
+
         val adapter = PostAdapter(viewModel)
 
         binding.postsRecyclerView.adapter = adapter

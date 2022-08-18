@@ -16,8 +16,6 @@ class PostViewModel : ViewModel(), PostInteractiveListener {
 
     val currentPost = MutableLiveData<Post?>(null)
 
-    val flagFocusEditText = MutableLiveData<Boolean>(false)
-
     override fun onLikeClicked(post: Post) = repository.like(post.id)
 
     override fun onShareClicked(post: Post) = repository.share(post.id)

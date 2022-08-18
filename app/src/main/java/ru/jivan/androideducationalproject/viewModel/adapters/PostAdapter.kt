@@ -3,7 +3,6 @@ package ru.jivan.androideducationalproject.viewModel.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -67,15 +66,11 @@ internal class PostAdapter(
                 author.text = post.author
                 content.text = post.content
                 date.text = post.published
-                shareValue.text = convertThousandsToText(post.share)
-                likeValue.text = convertThousandsToText(post.likes)
-                likes.setImageResource(getLikeIconResId(post.likedByMe))
+                share.text = convertThousandsToText(post.share)
+                likes.text = convertThousandsToText(post.likes)
+                likes.isChecked = post.likedByMe
             }
         }
-
-        @DrawableRes
-        private fun getLikeIconResId(liked: Boolean) =
-            if (liked) R.drawable.ic_liked_24 else R.drawable.ic_likes_24dp
 
         private fun convertThousandsToText(likes: Int): String {
             when {
