@@ -75,7 +75,6 @@
         android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="12dp"
         app:icon="@drawable/ic_options_24dp"
         app:iconTint="?attr/colorControlNormal"
         app:layout_constraintEnd_toEndOf="parent"
