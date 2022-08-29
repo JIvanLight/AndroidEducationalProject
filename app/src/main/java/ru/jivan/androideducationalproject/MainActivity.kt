@@ -1,5 +1,7 @@
 package ru.jivan.androideducationalproject
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -43,6 +45,14 @@ class MainActivity : AppCompatActivity() {
             bundle.putString(Keys.ACTION_KEY, Intents.ACTION_ADD_POST)
             bundle.putString(Keys.CONTENT_KEY, null)
             postContentActionsActivityLauncher.launch(bundle)
+        }
+
+        viewModel.navigateToPlayLinkVideoEvent.observe(this) {
+            if (it != null) {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
+                val chooser = Intent.createChooser(intent, getString(R.string.chooser_video))
+                startActivity(chooser)
+            }
         }
     }
 }

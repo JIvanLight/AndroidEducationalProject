@@ -14,4 +14,6 @@ interface PostInteractiveListener {
     fun onSaveButtonClicked(content: Bundle)
 
     fun onEditClicked(post: Post)
+
+    fun onPlayVideoClicked(post: Post)
 }

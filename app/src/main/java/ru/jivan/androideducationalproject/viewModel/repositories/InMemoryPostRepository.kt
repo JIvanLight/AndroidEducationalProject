@@ -2,28 +2,38 @@ package ru.jivan.androideducationalproject.viewModel.repositories
 
 import androidx.lifecycle.MutableLiveData
 import ru.jivan.androideducationalproject.dto.Post
+import java.util.*
 
 class InMemoryPostRepository : PostRepository {
 
     private var nextId = 10
 
     override val data = MutableLiveData(
-        List(10) {
+        (mutableListOf(Post(
+            id = 1,
+            author = "Иван",
+            content = "Здесь могла быть Ваша РЕКЛАМА! №1",
+            published = "6 июня 2022 в 12:30",
+            likes = 1_999_999,
+            share = 990,
+            linkVideo = "https://www.youtube.com/watch?v=uN6lwGwn9aw&list=PLxAu73S7-QXCNbYUCR-tlDGeeQC1V1UCd&index=6"
+        )) + (MutableList(10) {
             Post(
-                id = 1 + it,
+                id = 2 + it,
                 author = "Иван",
-                content = "Здесь могла быть Ваша РЕКЛАМА! №${1 + it}",
+                content = "Здесь могла быть Ваша РЕКЛАМА! №${2 + it}",
                 published = "6 июня 2022 в 12:30",
                 likes = 1_999_999,
                 share = 990
             )
-        }
+        })).toMutableList()
     )
 
     private val posts
         get() = checkNotNull(data.value) {
             "Data value should not be null"
         }
+
 
     override fun like(postId: Int) {
         data.value = posts.map {
@@ -38,7 +48,7 @@ class InMemoryPostRepository : PostRepository {
                     it.copy(likes = decreasedLikes, likedByMe = newlikedByMe)
                 }
             } else it
-        }
+        }.toMutableList()
     }
 
     override fun share(postId: Int) {
@@ -47,11 +57,11 @@ class InMemoryPostRepository : PostRepository {
                 val increaseShare = it.share + 1
                 it.copy(share = increaseShare)
             } else it
-        }
+        }.toMutableList()
     }
 
     override fun remove(postId: Int) {
-        data.value = posts.filter { it.id != postId }
+        data.value = posts.filter { it.id != postId }.toMutableList()
     }
 
     override fun save(post: Post) {
@@ -59,14 +69,14 @@ class InMemoryPostRepository : PostRepository {
     }
 
     private fun insert(post: Post) {
-        data.value = listOf(
+        data.value = (listOf(
             post.copy(id = ++nextId)
-        ) + posts
+        ) + posts).toMutableList()
     }
 
     private fun update(post: Post) {
         data.value = posts.map {
             if (post.id == it.id) post else it
-        }
+        }.toMutableList()
     }
 }

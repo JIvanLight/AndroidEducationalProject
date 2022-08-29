@@ -18,8 +18,8 @@ class PostViewModel : ViewModel(), PostInteractiveListener {
     val data by repository::data
 
     val navigateToActionPostScreenEvent = SingleLiveEvent<Bundle>()
-    //val navigateToEditPostScreenEvent = SingleLiveEvent<Unit>()
-    //val navigateToAddPostScreenEvent = SingleLiveEvent<Unit>()
+
+    val navigateToPlayLinkVideoEvent = SingleLiveEvent<String?>()
 
     val currentPost = MutableLiveData<Post?>(null)
 
@@ -58,5 +58,9 @@ class PostViewModel : ViewModel(), PostInteractiveListener {
         bundle.putString(Keys.CONTENT_KEY, postContent)
         bundle.putString(Keys.ACTION_KEY, Intents.ACTION_EDIT_POST)
         navigateToActionPostScreenEvent.value = bundle
+    }
+
+    override fun onPlayVideoClicked(post: Post) {
+        navigateToPlayLinkVideoEvent.value = post.linkVideo
     }
 }

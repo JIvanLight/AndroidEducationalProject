@@ -1,6 +1,7 @@
 package ru.jivan.androideducationalproject.viewModel.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
@@ -28,6 +29,32 @@ internal class PostAdapter(
     inner class ViewHolder(private val binding: PostBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        lateinit var post: Post
+
+        init {
+            binding.video.setOnClickListener { interactionListener.onPlayVideoClicked(post) }
+            binding.videoButton.setOnClickListener { interactionListener.onPlayVideoClicked(post) }
+            binding.likes.setOnClickListener { interactionListener.onLikeClicked(post) }
+            binding.share.setOnClickListener { interactionListener.onShareClicked(post) }
+            binding.optionsIc.setOnClickListener { popupMenu.show() }
+        }
+
+        fun bind(post: Post) {
+
+            this.post = post
+
+            with(binding) {
+                author.text = post.author
+                content.text = post.content
+                date.text = post.published
+                share.text = convertThousandsToText(post.share)
+                likes.text = convertThousandsToText(post.likes)
+                likes.isChecked = post.likedByMe
+                if (post.linkVideo != null) videoGroup.visibility = View.VISIBLE
+                else videoGroup.visibility = View.GONE
+            }
+        }
+
         private val popupMenu by lazy {
             PopupMenu(
                 itemView.context,
@@ -47,28 +74,6 @@ internal class PostAdapter(
                         else -> false
                     }
                 }
-            }
-        }
-
-        lateinit var post: Post
-
-        init {
-            binding.likes.setOnClickListener { interactionListener.onLikeClicked(post) }
-            binding.share.setOnClickListener { interactionListener.onShareClicked(post) }
-            binding.optionsIc.setOnClickListener { popupMenu.show() }
-        }
-
-        fun bind(post: Post) {
-
-            this.post = post
-
-            with(binding) {
-                author.text = post.author
-                content.text = post.content
-                date.text = post.published
-                share.text = convertThousandsToText(post.share)
-                likes.text = convertThousandsToText(post.likes)
-                likes.isChecked = post.likedByMe
             }
         }
 
