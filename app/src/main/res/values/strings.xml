@@ -12,4 +12,5 @@
     <string name="redact_text">Edit\n %1$s</string>
     <string name="description_post_like">description post like</string>
     <string name="edit">Edit\n %1$s</string>
+    <string name="chooser_video">Select a player</string>
 </resources>

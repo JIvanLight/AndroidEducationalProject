@@ -1,5 +1,6 @@
 package ru.jivan.androideducationalproject.viewModel
 
+import android.os.Bundle
 import ru.jivan.androideducationalproject.dto.Post
 
 interface PostInteractiveListener {
@@ -10,7 +11,9 @@ interface PostInteractiveListener {
 
     fun onRemoveClicked(post: Post)
 
-    fun onSaveButtonClicked(content: String)
+    fun onSaveButtonClicked(content: Bundle)
 
     fun onEditClicked(post: Post)
+
+    fun onPlayVideoClicked(post: Post)
 }

@@ -5,7 +5,7 @@ import ru.jivan.androideducationalproject.dto.Post
 
 interface PostRepository {
 
-    val data: LiveData<List<Post>>
+    val data: LiveData<MutableList<Post>>
 
     fun like(postId: Int)
 

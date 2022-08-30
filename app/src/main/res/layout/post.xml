@@ -75,7 +75,6 @@
         android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="12dp"
         app:icon="@drawable/ic_options_24dp"
         app:iconTint="?attr/colorControlNormal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,13 +89,27 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="avatar, constraintLayout, optionsIc" />
 
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierBottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="content"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierForVideo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="video"/>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/likes"
         android:checkable="true"
         app:iconTint="@color/likes_icon_button_colors_selector"
         app:icon="@drawable/like_icon_button_selector_state"
         app:layout_constraintStart_toStartOf="@id/content"
-        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintTop_toBottomOf="@id/video"
         tools:text="100500"
         style="@style/Widget.AppTheme.LSCheckBox" />
 
@@ -111,14 +124,6 @@
         app:layout_constraintTop_toTopOf="@id/likes"
         tools:text="100500"
         style="@style/Widget.AppTheme.LSCheckBox" />
-
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrierBottom"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="content" />
 
     <ImageButton
         android:id="@+id/eye"
@@ -143,4 +148,41 @@
         app:layout_constraintBottom_toBottomOf="@id/likes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/likes" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/video"
+        android:layout_width="385dp"
+        android:layout_height="347dp"
+        android:src="@mipmap/ic_video"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <ImageButton
+        android:id="@+id/videoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_button_round"
+        android:src="@drawable/ic_baseline_play_circle_72"
+        android:focusable="true"
+        android:clickable="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/video"
+        app:layout_constraintBottom_toBottomOf="@id/video"
+        app:layout_constraintStart_toStartOf="@id/video"
+        app:layout_constraintEnd_toEndOf="@id/video"
+        />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/videoGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="video, videoButton"
+        android:visibility="gone"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

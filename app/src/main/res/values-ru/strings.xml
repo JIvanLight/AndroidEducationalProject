@@ -12,4 +12,5 @@
     <string name="redact_text">Редактирование\n %1$s </string>
     <string name="description_post_like">описание лайка поста</string>
     <string name="edit">Редактировать</string>
+    <string name="chooser_video">Выберите проигрыватель</string>
 </resources>
