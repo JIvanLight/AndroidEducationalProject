@@ -1,19 +1,21 @@
 package ru.jivan.androideducationalproject.viewModel
 
+import android.app.Application
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import ru.jivan.androideducationalproject.viewModel.repositories.InMemoryPostRepository
 import ru.jivan.androideducationalproject.viewModel.repositories.PostRepository
 import ru.jivan.androideducationalproject.dto.Post
 import ru.jivan.androideducationalproject.utill.Intents
 import ru.jivan.androideducationalproject.utill.Keys
 import ru.jivan.androideducationalproject.utill.SingleLiveEvent
+import ru.jivan.androideducationalproject.viewModel.repositories.FilePostRepository
 
-class PostViewModel : ViewModel(), PostInteractiveListener {
+class PostViewModel(application: Application) : AndroidViewModel(application), PostInteractiveListener {
 
-    val repository: PostRepository = InMemoryPostRepository()
+    val repository: PostRepository = FilePostRepository(application)
 
     val data by repository::data
 

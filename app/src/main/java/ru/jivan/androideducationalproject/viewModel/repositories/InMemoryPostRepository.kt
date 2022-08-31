@@ -2,7 +2,6 @@ package ru.jivan.androideducationalproject.viewModel.repositories
 
 import androidx.lifecycle.MutableLiveData
 import ru.jivan.androideducationalproject.dto.Post
-import java.util.*
 
 class InMemoryPostRepository : PostRepository {
 
