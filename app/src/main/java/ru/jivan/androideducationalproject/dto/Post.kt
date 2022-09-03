@@ -1,5 +1,8 @@
 package ru.jivan.androideducationalproject.dto
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Post(
     val id: Int,
     val author: String,
