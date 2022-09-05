@@ -10,12 +10,12 @@ import ru.jivan.androideducationalproject.dto.Post
 import kotlin.properties.Delegates
 
 class FilePostRepository(
-    val application: Application
+    private val application: Application
 ): PostRepository {
 
     private val gson = Gson()
 
-    val type = TypeToken.getParameterized(List::class.java, Post::class.java).type
+    private val type = TypeToken.getParameterized(List::class.java, Post::class.java).type
 
     private val prefs = application.getSharedPreferences(
         DIR_SHARED_PREF_POST_REPOSITORY, Context.MODE_PRIVATE
@@ -53,7 +53,6 @@ class FilePostRepository(
             }
             data.value = value
         }
-
 
     override fun like(postId: Int) {
         posts = posts.map {

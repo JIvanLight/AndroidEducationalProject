@@ -7,7 +7,7 @@
     android:paddingStart="10dp"
     android:paddingTop="10dp"
     android:paddingEnd="10dp"
-    tools:context=".MainActivity">
+    tools:context=".FeedFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/avatar"

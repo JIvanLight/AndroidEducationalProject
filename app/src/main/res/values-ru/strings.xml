@@ -4,13 +4,14 @@
     <string name="content">Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингую Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионаловю Но самое важное остается с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия – помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb</string>
     <string name="header">Нетология. Университет интернет-профессий</string>
     <string name="date1">21 мая в 18:36 </string>
-    <string name="likeValue">10</string>
-    <string name="shareValue">5</string>
-    <string name="eyeValue">5</string>
+    <string name="likeValue">0</string>
+    <string name="shareValue">0</string>
+    <string name="eyeValue">0</string>
     <string name="remove">Удалить</string>
     <string name="post_text">Текст</string>
     <string name="redact_text">Редактирование\n %1$s </string>
     <string name="description_post_like">описание лайка поста</string>
     <string name="edit">Редактировать</string>
     <string name="chooser_video">Выберите проигрыватель</string>
+    <string name="chooser_share_post">Выберите приложение</string>
 </resources>

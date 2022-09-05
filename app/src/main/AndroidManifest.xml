@@ -10,19 +10,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidEducationalProject">
         <activity
-            android:name=".PostContentActionsActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
-        <activity
-            android:name=".MainActivity"
+            android:name=".AppActivity"
             android:exported="true"
-            android:windowSoftInputMode="stateHidden">
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleTask">
+            <nav-graph android:value="@navigation/nav_main" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
     </application>
 
 </manifest>

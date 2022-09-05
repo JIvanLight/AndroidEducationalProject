@@ -6,6 +6,7 @@
     android:id="@+id/editCoordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:windowSoftInputMode="adjustResize"
     app:layout_constraintBottom_toBottomOf="parent">
 
     <com.google.android.material.bottomappbar.BottomAppBar
@@ -35,7 +36,9 @@
             android:background="@android:color/transparent"
             android:gravity="start|top"
             android:inputType="textMultiLine"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:importantForAutofill="no"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="LabelFor" />
     </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
