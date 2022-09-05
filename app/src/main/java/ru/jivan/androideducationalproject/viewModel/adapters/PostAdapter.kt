@@ -19,24 +19,33 @@ internal class PostAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = PostBinding.inflate(inflater, parent, false)
-        return ViewHolder(binding)
+        return ViewHolder(binding, interactionListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    inner class ViewHolder(private val binding: PostBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(
+        private val binding: PostBinding,
+        interactionListener: PostInteractiveListener
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         lateinit var post: Post
 
         init {
-            binding.video.setOnClickListener { interactionListener.onPlayVideoClicked(post) }
-            binding.videoButton.setOnClickListener { interactionListener.onPlayVideoClicked(post) }
-            binding.likes.setOnClickListener { interactionListener.onLikeClicked(post) }
-            binding.share.setOnClickListener { interactionListener.onShareClicked(post) }
-            binding.optionsIc.setOnClickListener { popupMenu.show() }
+            with(binding) {
+                video.setOnClickListener { interactionListener.onPlayVideoClicked(post) }
+                videoButton.setOnClickListener { interactionListener.onPlayVideoClicked(post) }
+                likes.setOnClickListener { interactionListener.onLikeClicked(post) }
+                share.setOnClickListener { interactionListener.onShareClicked(post) }
+                optionsIc.setOnClickListener { popupMenu.show() }
+                content.setOnClickListener { interactionListener.onSelectPost(post) }
+                avatar.setOnClickListener { interactionListener.onSelectPost(post) }
+                author.setOnClickListener { interactionListener.onSelectPost(post) }
+                date.setOnClickListener { interactionListener.onSelectPost(post) }
+
+            }
         }
 
         fun bind(post: Post) {
